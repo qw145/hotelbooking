@@ -23,7 +23,7 @@ type EmailSender struct {
 
 func (s *EmailSender) SendConfirmation(ctx context.Context) error {
 	select {
-	case <-time.After(2 * time.Second):
+	case <-time.After(helper.Cfg.EmailSendDelay):
 		s.Log.Info("[EMAIL] s.booking confirmation",
 			"to", s.Booking.GuestEmail,
 			"guest", s.Booking.GuestName,
