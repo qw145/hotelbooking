@@ -1,0 +1,35 @@
+# Build artifacts
+/api
+/hotelbooking
+/hotelbooking.exe
+*.exe
+*.test
+*.out
+
+# Local databases created by running the API
+*.db
+*.db-shm
+*.db-wal
+booking.db*
+
+# Workspace-local Go caches.
+# These exist because the development sandbox makes the user-level module cache
+# read-only; on a normal machine you can delete them and use the default caches.
+/.gocache/
+/.gomodcache/
+
+# The gobuild helper is sandbox-specific, but the Postman verification script
+# under scripts/ is a real deliverable, so ignore the file rather than the
+# whole directory.
+/scripts/gobuild.cmd
+
+# Editor / OS noise
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local environment overrides
+.env
+.env.local
