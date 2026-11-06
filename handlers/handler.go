@@ -66,7 +66,7 @@ func (a *API) Handler() *http.ServeMux {
 	mux.HandleFunc("GET /api/v1/bookings/{reference}", a.handleGetBooking)
 
 	// --- Operational ------------------------------------------------------
-	mux.HandleFunc("GET /health", a.handleHealth)
+	mux.HandleFunc("GET /healthz", a.handleHealth)
 
 	// --- Test support -----------------------------------------------------
 

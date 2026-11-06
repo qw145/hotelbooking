@@ -109,7 +109,7 @@ func AccessLog(log *slog.Logger) middleware {
 				level = slog.LevelError
 			case rec.status >= http.StatusBadRequest:
 				level = slog.LevelWarn
-			case r.URL.Path == "/health":
+			case r.URL.Path == "/healthz":
 				// Health checks are frequent and uninteresting; keep them out
 				// of the default log stream.
 				level = slog.LevelDebug

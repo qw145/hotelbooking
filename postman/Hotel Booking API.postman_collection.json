@@ -27,7 +27,7 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{baseUrl}}/health",
+              "raw": "{{baseUrl}}/healthz",
               "host": [
                 "{{baseUrl}}"
               ],
