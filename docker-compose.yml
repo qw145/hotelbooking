@@ -1,0 +1,44 @@
+# Docker Compose for the Hotel Room Booking API.
+#
+# Default run (SQLite, zero configuration):
+#   docker compose up --build
+#
+# With SQL Server / Azure SQL emulation:
+#   docker compose --profile mssql up --build
+#
+# The API is then on http://localhost:8080 with interactive docs at /docs.
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hotel-booking-api:latest
+    container_name: hotel-booking-api
+    ports:
+      - "8080:8080"
+    environment:
+      APP_ENV: development
+      HTTP_ADDR: ":8080"
+      DB_DRIVER: sqlite
+      DB_DSN: "file:/data/booking.db?_pragma=foreign_keys(1)&_pragma=busy_timeout(5000)&_pragma=journal_mode(WAL)"
+      DB_AUTO_MIGRATE: "true"
+      SHUTDOWN_TIMEOUT: 15s
+      EMAIL_WORKER_COUNT: "4"
+      EMAIL_QUEUE_SIZE: "256"
+      # The two-second delay the challenge asks us to simulate.
+      EMAIL_SEND_DELAY: 2s
+    volumes:
+      # Named volume so a SQLite database survives `docker compose down`.
+      # Use `docker compose down -v` to discard it as well.
+      - booking-data:/data
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:8080/healthz"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+
+volumes:
+  booking-data:
