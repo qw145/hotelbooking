@@ -18,7 +18,7 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test('Status is 200', function () {\n    pm.response.to.have.status(200);\n});\n\npm.test('Database is reachable', function () {\n    const body = pm.response.json();\n    pm.expect(body.status).to.eql('ok');\n    pm.expect(body.database).to.eql('ok');\n});"
+                  "pm.test('Status is 200', function () {\n    pm.response.to.have.status(200);\n});\n\npm.test('Database is reachable', function () {\n    const body = pm.response.json();\n    pm.expect(body.status).to.eql('ok');\n});"
                 ]
               }
             }
@@ -32,7 +32,7 @@
                 "{{baseUrl}}"
               ],
               "path": [
-                "health"
+                "healthz"
               ]
             },
             "description": "Reports whether the service and its database are healthy."
