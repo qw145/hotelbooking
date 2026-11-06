@@ -29,7 +29,11 @@ booking.db*
 *.swp
 .DS_Store
 Thumbs.db
+.postman/
 
 # Local environment overrides
 .env
 .env.local
+
+# Postman
+postman
