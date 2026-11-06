@@ -165,6 +165,9 @@ func (a *API) handleAvailability(w http.ResponseWriter, r *http.Request) {
 	if checkIn.After(checkOut) {
 		details = append(details, "check in after check out ")
 	}
+	if checkIn.Equal(checkOut) {
+		details = append(details, "check in and check out the same")
+	}
 	if len(details) > 0 {
 		writeJSON(w, a.log, http.StatusBadRequest, ValidationError(details))
 		return
@@ -230,6 +233,9 @@ func (a *API) handleCreateBooking(w http.ResponseWriter, r *http.Request) {
 	}
 	if checkIn.After(checkOut) {
 		details = append(details, "check in after check out ")
+	}
+	if checkIn.Equal(checkOut) {
+		details = append(details, "check in and check out the same")
 	}
 
 	if len(details) > 0 {
